@@ -19,7 +19,7 @@ jobs:
       uses: actions/setup-java@v4.6.0
       with:
         java-version: '21'
-        distribution: 'openjdk'
+        distribution: 'adopt'
         
     - name: Build Eureka Naming Server Container Image
       working-directory: ./naming-server
