@@ -1,3 +1,30 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+#logging:
+#  pattern:
+#    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
+management:
+  tracing:
+    sampling:
+      probability: 1
+resilience4j:
+  bulkhead:
+    instances:
+      default:
+        maxConcurrentCalls: 10
+  ratelimiter:
+    instances:
+      default:
+        limitForPeriod: 2
+        limitRefreshPeriod: 10s
+  retry:
+    instances:
+      foo-bar:
+        maxAttempts: 5
+        waitDuration: 1000
+        enableExponentialBackoff: true
 server:
   port: 8100
 spring:
@@ -13,12 +40,7 @@ spring:
     hibernate:
       ddl-auto: none
     show-sql: false
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
   flyway:
-    url: jdbc:mysql://127.0.0.1:3306/book_service
-    schemas:
-      - book_service
+    url: jdbc:mysql://127.0.0.1:3306/book_service?useTimezone=true&serverTimezone=UTC
     user: root
     password: 220624And
